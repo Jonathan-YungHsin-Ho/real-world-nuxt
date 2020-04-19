@@ -1,3 +1,5 @@
+import EventService from './services/EventService'
+
 export default {
   mode: 'universal',
   /*
@@ -66,6 +68,15 @@ export default {
           }
         })
       }
+    }
+  },
+  generate: {
+    routes: () => {
+      return EventService.getEvents().then((response) => {
+        return response.data.map((event) => {
+          return '/event/' + event.id
+        })
+      })
     }
   }
 }
